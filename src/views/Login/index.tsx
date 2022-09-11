@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import '../assets/scss/Login.scss'
-import SivdevLogo from '../assets/imgs/sibdev-logo.svg'
+import 'assets/scss/Login.scss'
+import SivdevLogo from 'assets/imgs/sibdev-logo.svg'
 
 type Props = {
 
