@@ -1,9 +1,9 @@
 import React from 'react';
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import '../assets/scss/Common.scss'
-import Home from './Home/index'
-import Login from './Login'
-import Logout from './Logout'
+import Home from './screens/Home/index'
+import Login from './screens/Login/Login'
+import Logout from './screens/Logout'
 import NotFound from './NotFound'
 import PrivateRoute from "./PrivateRoute";
 

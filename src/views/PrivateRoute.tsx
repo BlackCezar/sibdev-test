@@ -1,20 +1,33 @@
 // @flow
 import * as React from 'react';
-import {Navigate, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../store/hook";
+import {useLayoutEffect} from "react";
+import {getUserProfile} from "../store/authentication/authentication.actions";
+import Layout from './layout/Layout';
 
 const PrivateRoute = ({children}: {children: JSX.Element}) => {
-    let location = useLocation()
-    // @ts-ignore
-    const { isAuth, loading } = useSelector(state => state.auth)
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const {isLoading, isAuth} = useAppSelector(state => state.auth)
 
-    if (loading) {
-        return <p>Loading</p>
+    useLayoutEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            console.log('Get token')
+            dispatch(getUserProfile(token))
+        } else {
+            navigate('/login')
+        }
+    }, [])
+
+    
+    console.log(isLoading, isAuth)
+    if (isLoading) {
+        return <p>Загрузка</p>
     }
-    if (!isAuth) {
-        return <Navigate to={'/login'} state={{from: location}} />
-    }
-    return children;
+  
+    return <Layout>{children}</Layout>;
 };
 
 export default PrivateRoute
