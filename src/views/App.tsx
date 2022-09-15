@@ -6,6 +6,7 @@ import Login from './screens/Login/Login'
 import Logout from './screens/Logout'
 import NotFound from './NotFound'
 import PrivateRoute from "./PrivateRoute";
+import Favorite from './screens/Favorite/Favorite';
 
 export interface IAppProps {
 }
@@ -16,6 +17,7 @@ const App: React.FC<IAppProps> = (props) => {
             <Routes>
                 <Route path='login' element={<Login/>}/>
                 <Route path='logout' element={<Logout/>}/>
+                <Route path='favorite' element={<PrivateRoute><Favorite/></PrivateRoute>}/>
                 <Route path='/' element={<PrivateRoute><Home/></PrivateRoute>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
