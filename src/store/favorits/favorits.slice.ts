@@ -1,10 +1,10 @@
 import { FavoritsState, Favorite } from './favorits.interface';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: FavoritsState = {
     isLoading: false,
     error: '',
+    lastIndex: 0,
     list: [],
 }
 
@@ -13,23 +13,24 @@ const FavoritsSlice = createSlice({
     initialState,
     reducers: {
         addFavoritToList(state, action: PayloadAction<Favorite>) {
-            state.list.push(action.payload)
-            state.isLoading = true
+            console.log(action)
+            state.lastIndex++;
+            state.list.push({
+                ...action.payload,
+                id: state.lastIndex
+            })
+            state.isLoading = false
         },
-        removeFavoriteFromList(state, {payload}: PayloadAction<number>) {
-            state.list = state.list.filter(fav => fav.id !== payload)
+        removeFavoriteFromList(state, action: PayloadAction<number>) {
+            state.list = state.list.filter(fav => fav.id !== action.payload)
             state.isLoading = false
         },
         editFavoriteFromList(state, action: PayloadAction<Favorite>) {
-            state.list = state.list.map(item => {
-                if (item.id === action.payload.id) {
-                    item.query === action.payload.query
-                }
-                return item
-            })
-        }
+            const index = state.list.findIndex(item => item.id === action.payload.id);
+            state.list[index].query = action.payload.query ;
+        },
     }
 })
 
 export const {addFavoritToList, removeFavoriteFromList, editFavoriteFromList} = FavoritsSlice.actions
-export default FavoritsSlice
+export default FavoritsSlice.reducer

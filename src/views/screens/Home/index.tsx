@@ -7,23 +7,40 @@ import { ReactComponent as GridView } from 'assets/imgs/grid.svg';
 import Img from '../../ui/Image'
 import './Home.scss'
 import { SearchResource } from 'store/search/search.interface';
-import Favorite from './Favorite';
+import FavoriteComp from './Favorite';
+import Modal from '../Favorite/Modal';
+import { Favorite, YouTubeOrder } from 'store/favorits/favorits.interface';
 
 export interface IHomeProps {
 
 }
 
 const Home: React.FC<IHomeProps> = (props) => {
-    const [query, setQuery] = React.useState('')
+    const [query, setQuery] = React.useState<Favorite>({
+        id: 0,
+        name: '',
+        query: '',
+        sortBy: YouTubeOrder.relevance,
+        maxCount: 12
+    })
     const [tmpQuery, setTmpQuery] = React.useState('')
     const dispatch = useAppDispatch()
     const { isLoading, list, pageInfo } = useAppSelector(state => state.search)
     const [selectedViewType, setViewType] = React.useState('grid')
+    const [showModal, setShowModal] = React.useState(false)
 
     const searchQuery = () => {
-        setQuery(tmpQuery)
+        setQuery({
+            id: 0,
+            sortBy: YouTubeOrder.relevance,
+            maxCount: 12,
+            query: tmpQuery,
+            name: tmpQuery
+        })
         dispatch(fetchVideoSearch(tmpQuery))
     }
+
+    const closeModal = () => setShowModal(false)
 
     const renderVideoList = React.useCallback((videos: Array<SearchResource>) => {
         return videos.map(video => renderVideoItem(video))
@@ -31,7 +48,7 @@ const Home: React.FC<IHomeProps> = (props) => {
     )
 
     const renderVideoItem = React.useCallback((video: SearchResource) => {
-        return (<div className='video-item'>
+        return (<div key={video.id.videoId} className='video-item'>
             <Img src={video.snippet.thumbnails.high.url} />
             <span className='video-title'>{video.snippet.title}</span>
             <span className="video-channel">{video.snippet.channelTitle}</span>
@@ -45,7 +62,7 @@ const Home: React.FC<IHomeProps> = (props) => {
                 <h1>Поиск видео</h1>
                 <form className="search-page-form" onSubmit={ev => ev.preventDefault()}>
                     <input type="search" value={tmpQuery} onChange={ev => setTmpQuery(ev.target.value)} placeholder='Что хотите посмотреть?' />
-                    <Favorite />
+                    <FavoriteComp hidden={!query} setShowModal={setShowModal} />
                     <input type="submit" onClick={searchQuery} value='Найти' />
                 </form>
             </div>
@@ -53,7 +70,7 @@ const Home: React.FC<IHomeProps> = (props) => {
                 <div className="search-page-content">
                     <div className="search-page-row">
                         <div className="search-page-count">
-                            Видео по запросу  <b>«{query}»</b> <span>{pageInfo && pageInfo.totalResults}</span>
+                            Видео по запросу  <b>«{tmpQuery}»</b> <span>{pageInfo && pageInfo.totalResults}</span>
                         </div>
                         <div className="search-page-view">
                             <ListView className={selectedViewType === 'list' ? 'active' : ''} onClick={() => setViewType('list')} /> 
@@ -64,6 +81,7 @@ const Home: React.FC<IHomeProps> = (props) => {
                         {renderVideoList(list as Array<SearchResource>)}
                     </div>
                 </div>}
+            <Modal closeModal={closeModal} query={query} isEdit={false} show={showModal} />
         </div>
     );
 };
