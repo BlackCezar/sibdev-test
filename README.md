@@ -7,11 +7,11 @@
 ### `npm install`
 
 2) Нужно получить ключ от Youtube API. 
-Инструкция отчасти есть в [https://developers.google.com/youtube/v3/getting-started#intro].
+Инструкция есть в (Youtube API)[https://developers.google.com/youtube/v3/getting-started#intro].
 
 3) Создать файл .env и вставить туда ключ от Youtube API. Пример файла есть в папке и называется `.env-example`
 
-4) Запустить [https://github.com/BlackCezar/sibdev-back.git](серверную часть приложения).
+4) Запустить (серверную часть приложения)[https://github.com/BlackCezar/sibdev-back.git].
 
 5) Если вы изменяли порт на серверной части, то его нужно указать в package.json в proxy свойстве.
 
