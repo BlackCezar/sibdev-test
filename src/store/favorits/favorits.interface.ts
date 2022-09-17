@@ -3,7 +3,9 @@ export type Favorite = {
     query: string,
     name: string,
     sortBy: string,
-    maxCount: number
+    maxCount: number,
+    viewType: string,
+    author?: number
 }
 
 export type FavoritsState = {
@@ -14,12 +16,12 @@ export type FavoritsState = {
 }
 
 export enum YouTubeOrder {
-    date = 'Дате',
-    rating = 'Рейтингу',
-    relevance = 'Актуальность',
-    videoCount = 'Кол-во видиео в канале',
-    viewCount = 'Кол-во просмотров',
-    title = 'Названию'
+    date = 'date',
+    rating = 'rating',
+    relevance = 'relevance',
+    videoCount = 'videoCount',
+    viewCount = 'viewCount',
+    title = 'title'
 }
 
 export interface IFavorite {}

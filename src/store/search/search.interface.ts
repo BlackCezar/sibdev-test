@@ -11,6 +11,19 @@ export interface AuthResponse {
     items: Array<SearchResource>
 }
 
+export interface AuthStatisticsResponse {
+  kind: string,
+  etag: string,
+  nextPageToken: string,
+  prevPageToken: string,
+  regionCode: string,
+  pageInfo: {
+      totalResults: number,
+      resultsPerPage: number
+  },
+  items: Array<StatisticsItem>
+}
+
 export type SearchResource = {
     kind: string,
     etag: string,
@@ -19,6 +32,13 @@ export type SearchResource = {
       videoId: string,
       channelId: string,
       playlistId: string
+    },
+    stats?: {
+      viewCount: number,
+      likeCount: number,
+      dislikeCount: number,
+      favoriteCount: number,
+      commentCount: number
     },
     snippet: {
       publishedAt: Date,
@@ -45,6 +65,29 @@ export type SearchResource = {
       channelTitle: string,
       liveBroadcastContent: string
     }
+}
+
+export type AdvancedSearchResult = {
+  list: Array<SearchResource>,
+  pageInfo: {
+    totalResults: number,
+    resultsPerPage: number
+  } | null,
+  query: string,
+  statistics: Array<StatisticsItem>
+}
+
+export type StatisticsItem = {
+  kind: string,
+  etag: string,
+  id: string,
+  statistics: {
+    viewCount: number,
+    likeCount: number,
+    dislikeCount: number,
+    favoriteCount: number,
+    commentCount: number
+  }
 }
 
 export type SearchState = {

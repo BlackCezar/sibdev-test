@@ -5,9 +5,19 @@
     min-height: 100vh;
 
     &-container {
-        width: 1040px;
+        max-width: 1040px;
         margin: 0 auto;
         padding: 40px 0;
+
+        @media (max-width: $laptopWdith) {
+            padding: 40px;
+        }
+        @media (max-width: $smallTabletWidth) { 
+            padding: 40px 15px;
+        }
+        @media (max-width: $mobileWidth) { 
+            padding: 40px 8px;
+        }
     }
 
     header {
@@ -15,16 +25,29 @@
         border-bottom: 1px solid #F1F1F1;
 
         .container {
-            width: 1040px;
+            max-width: 1040px;
             margin: 0 auto;
             display: flex;
             align-items: center;
+
+            @media (max-width: $laptopWdith) {
+                padding: 0 40px;
+            }
+            @media (max-width: $smallTabletWidth) { 
+                padding: 0px 15px;
+            }
+            @media (max-width: $mobileWidth) { 
+                padding: 0px 8px;
+            }
         }
         .header-logo {
             width: 48px;
             height: 48px;
             margin: 16px 0;
             margin-right: 40px;
+            @media (max-width: $smallTabletWidth) { 
+                margin-right: 20px;
+            }
         }
 
         ul {
@@ -43,6 +66,11 @@
                 margin-right: 40px;
                 font-size: 18px;
                 text-decoration-line: none;
+
+                @media (max-width: $smallTabletWidth) { 
+                    margin-right: 20px;
+                    font-size: 14px;
+                }
 
                 &:hover, &.active {
                     color: $siberianBlue;

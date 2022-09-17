@@ -22,10 +22,6 @@ const authSlice = createSlice({
             state.isLoading = false
             state.isAuth = true
             state.msg = ''
-
-            if (action.payload.token) {
-                localStorage.setItem('token', action.payload.token)
-            }
         },
         signInFailure(state) {
             state.isLoading = false
@@ -39,6 +35,7 @@ const authSlice = createSlice({
         logout(state) {
             state.isAuth = false
             state.user = null
+            state.token = null
         }
     }
 })

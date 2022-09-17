@@ -1,5 +1,16 @@
 @use 'sass:math';
 @import "./_variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
 .image-placeholder {
     max-height: 140px;
@@ -12,6 +23,14 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
+    }
+
+    @media (max-width: $smallTabletWidth) {
+      min-width: 38vw;
+      height: auto;
+    }
+    @media (max-width: $mobileWidth) {
+      width: 100%;
     }
 }
 
@@ -34,6 +53,8 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     margin-bottom: 24px;
     flex-direction: column;
+    position: relative;
+    width: 100%;
 
     label {
         color: $gray;
@@ -52,8 +73,39 @@ input[type="search"]::-webkit-search-results-decoration {
         line-height: 24px;
         outline: none;
         color: $dark;
-
+        position: relative;
         font-family: 'Roboto';
+        box-sizing: border-box;
+
+        &[type=password] {
+          padding-right: 46px;
+        }
+
+        + .input-btn {
+          position: absolute;
+          right: 16px;
+          bottom: 14px;
+          width: 22px;
+          cursor: pointer;
+          height: 22px;
+          z-index: 2;
+    
+          &:focus path, &:hover path {
+            stroke: $siberianBlue;
+          }
+          path {
+            transition: stroke .3s;
+          }
+        }
+    
+        &:focus, &:active {
+          border-color: $siberianBlue;
+          background-color: rgba(197, 228, 249, 0.3);
+    
+          + .login-page-input-btn path {
+            stroke: $siberianBlue;
+          }
+        }
     }
 
     & .range {
@@ -70,24 +122,24 @@ input[type="search"]::-webkit-search-results-decoration {
 
 
 $track-color: rgba(23, 23, 25, 0.09) !default;
-$thumb-color: #ffffff !default;
+$thumb-color: white !default;
 
 $thumb-radius: 12px !default;
 $thumb-height: 18px !default;
 $thumb-width: 18px !default;
 $thumb-shadow-size: 0px !default;
 $thumb-shadow-blur: 0px !default;
-$thumb-shadow-color: rgba(0, 0, 0, 0) !default;
+$thumb-shadow-color: transparent !default;
 $thumb-border-width: 2px !default;
-$thumb-border-color: #1390E5 !default;
+$thumb-border-color: $siberianBlue !default;
 
 $track-width: 100% !default;
 $track-height: 6px !default;
 $track-shadow-size: 0px !default;
 $track-shadow-blur: 0px !default;
-$track-shadow-color: rgba(0, 0, 0, 0) !default;
+$track-shadow-color: transparent !default;
 $track-border-width: 0px !default;
-$track-border-color: linear-gradient(0deg, rgba(19, 144, 229, 0.8), rgba(19, 144, 229, 0.8)), #FFFFFF !default;
+$track-border-color: linear-gradient(0deg, $siberianBlue, rgba(19, 144, 229, 0.8)), white !default;
 
 $track-radius: 5px !default;
 $contrast: 50% !default;
@@ -208,4 +260,16 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
     }
   }
 }
+}
+
+body::-webkit-scrollbar {
+  width: 6px;   
+}
+body::-webkit-scrollbar-track {
+  background: $lightGray;       
+}
+body::-webkit-scrollbar-thumb {
+  background-color: $siberianBlue;    
+  border-radius: 20px;       
+  border: 0;  
 }

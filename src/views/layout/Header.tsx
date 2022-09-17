@@ -2,12 +2,12 @@ import React from 'react';
 import '../../assets/scss/Common.scss'
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as SibDevLogo } from 'assets/imgs/sibdev-logo.svg'
-export interface IHeaderProps {
-}
+import { IHeaderProps } from './Layout.interface';
+
 
 const App: React.FC<IHeaderProps> = () => {
     const location = useLocation()
-    console.log(location)
+
     return (
         <header>
             <div className="container">

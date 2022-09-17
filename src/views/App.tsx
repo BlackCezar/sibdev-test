@@ -4,8 +4,8 @@ import '../assets/scss/Common.scss'
 import Home from './screens/Home/index'
 import Login from './screens/Login/Login'
 import Logout from './screens/Logout'
-import NotFound from './NotFound'
-import PrivateRoute from "./PrivateRoute";
+import NotFound from './screens/NotFound'
+import PrivateRoute from "./lib/PrivateRoute";
 import Favorite from './screens/Favorite/Favorite';
 
 export interface IAppProps {

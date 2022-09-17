@@ -1,19 +1,18 @@
-// @flow
-import * as React from 'react';
+import React from 'react'
+import { Navigate } from 'react-router-dom'
+import { logoutFetch } from 'store/authentication/authentication.actions'
+import { useAppDispatch } from 'store/hook'
+import useToken from 'views/lib/useToken'
+interface ILogout {}
 
-type Props = {
+const Logout:React.FC<ILogout> = () => {
+    const dispatch = useAppDispatch()
+    const {removeToken} = useToken()
+    
+    dispatch(logoutFetch())
+    removeToken()
 
-};
-type State = {};
+    return <Navigate to="/login" />
+}
 
-export default class Logout extends React.Component<Props, State> {
-    render() {
-        return (
-            <div className='login-page'>
-                <div className="login-page-container">
-                    <h1>Logout</h1>
-                </div>
-            </div>
-        );
-    };
-};
+export default Logout

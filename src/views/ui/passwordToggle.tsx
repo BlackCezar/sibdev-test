@@ -10,10 +10,9 @@ interface IPasswordToggle {
 const PasswordToggle: React.FC<IPasswordToggle> = ({showPass, hidePass}) => {
     const [active, setActive] = useState('off')
 
-    return (<div className='login-page-input-btn'>
+    return (<div className='input-btn'>
         {active === 'off' ? <EyeOff onClick={ev => {
                 setActive('on')
-            console.log('on')
                 showPass(ev)
             }}/> :
             <EyeOn onClick={ev => {

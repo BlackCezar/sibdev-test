@@ -19,22 +19,27 @@
 
 
         input[type=search] {
-            background: #FFFFFF;
+            background: white;
             padding: 14px 15px;
             outline: none;
             font-size: 20px;
             line-height: 24px;
-            color: #272727;
+            color: $dark;
             transition: width 0.3s;
             width: 100%;
-            border: 1px solid rgba(23, 23, 25, 0.2);
+            border: 1px solid $transparentGray;
             border-radius: 10px;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+
+            @media (max-width: $smallTabletWidth) { 
+                font-size: 20px;
+                padding-right: 27px;
+            }
         }
 
         input[type=submit] {
-            background: #1390E5;
+            background: $siberianBlue;
             border-radius: 0px 10px 10px 0px;
             padding: 14px 20px;
             font-size: 20px;
@@ -44,6 +49,12 @@
             color: white;
             cursor: pointer;
             min-width: 110px;
+
+            @media (max-width: $smallTabletWidth) { 
+                min-width: unset;
+                width: 90px;
+                box-sizing: border-box;
+            }
         }
     } 
 
@@ -86,11 +97,13 @@
     .video-item {
         display: grid;
         grid-gap: 8px;
-        grid-template-rows: max-content min-content;
+        width: 100%;
+        grid-template-rows: max-content min-content min-content;
         grid-template-areas: 
         "img"
         "title"
-        " channel";
+        " channel"
+        "vcount";
       
         img {
             max-width: 100%;
@@ -107,6 +120,16 @@
             display: grid;
             grid-gap: 20px;
             grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            @media (max-width: $tabletWidth) { 
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            @media (max-width: $smallTabletWidth) { 
+                grid-template-columns: 1fr 1fr;
+            }
+            @media (max-width: $mobileWidth) { 
+                grid-template-columns: 1fr;
+            }
         }
 
         &.search-page-list {
@@ -118,23 +141,47 @@
                 display: grid;
                 grid-template-areas: 
                     "img title"
-                    "img channel";
-                grid-template-rows: auto 1fr;
+                    "img channel"
+                    "img vcount";
+                grid-template-rows: auto min-content 1fr;
                 grid-template-columns: 260px 510px;
+
+                .video-title {
+                    font-size: 16px;
+                    @media (max-width: $smallTabletWidth) {
+                        grid-template-columns: 38vw auto;
+                        font-size: 14px;
+                    }
+                }
                 .image-placeholder {
                     grid-area: img;
+                }
+
+                @media (max-width: $laptopWdith) { 
+                    grid-template-columns: 260px auto;
+                }
+                @media (max-width: $smallTabletWidth) {
+                    grid-template-columns: 38vw auto;
                 }
             }
         }
     }
     &-count {
-        color: #272727;
+        color: $dark;
         font-size: 16px;
         margin-bottom: 20px;
 
+        @media (max-width: $smallTabletWidth) {
+            font-size: 12px;
+        }
+
         span {
-            color: rgba(23, 23, 25, 0.3);
+            color: $gray;
             margin-left: 15px;
+
+            @media (max-width: $smallTabletWidth) {
+                margin-left: 5px;
+            }
         }
     }
     &-view {
@@ -158,7 +205,7 @@
 
 
     .video-title {
-        color: #272727; 
+        color: $dark; 
         font-weight: 500;
         font-size: 14px;
         line-height: 16px;
@@ -166,11 +213,25 @@
         grid-area: title;
     }
     .video-channel {
-        color: rgba(23, 23, 25, 0.3);
+        color: $gray;
         font-size: 14px;
         display: block;
         line-height: 16px;
         grid-area: channel;
+        @media (max-width: $smallTabletWidth) {
+            font-size: 12px;
+        }
+    }
+    .video-vcount {
+        color: $gray;
+        font-size: 14px;
+        display: block;
+        line-height: 16px;
+        margin-top: -8px;
+        grid-area: vcount;
+        @media (max-width: $smallTabletWidth) {
+            font-size: 12px;
+        }
     }
 
     .favorite {
@@ -178,10 +239,19 @@
         right: 165px;
         top: 14px;
 
+        @media (max-width: $smallTabletWidth) { 
+            right: 97px;
+        }
 
-        svg:hover {
-            cursor: pointer;
-            fill: #C5E4F9;
+
+        svg {
+            @media (max-width: $smallTabletWidth) { 
+                width: 20px;
+            }
+            &:hover {
+                cursor: pointer;
+                fill: $lightBlue;
+            }
         }
         .tooltip-wrapper {
             position: absolute;
@@ -198,7 +268,7 @@
             display: flex;
             width: 220px;
             flex-direction: column;
-            box-shadow:  0px 2px 6px rgba(0, 0, 0, 0.15);
+            box-shadow:  0px 2px 6px $transparentGray1;
             &::after {
                 content: "";
                 position: absolute;
@@ -212,7 +282,7 @@
             }
 
             span {
-                color: #272727;
+                color: $dark;
                 font-size: 16px;
                 opacity: 0.5; 
                 margin-bottom: 15px;

@@ -13,7 +13,6 @@ const FavoritsSlice = createSlice({
     initialState,
     reducers: {
         addFavoritToList(state, action: PayloadAction<Favorite>) {
-            console.log(action)
             state.lastIndex++;
             state.list.push({
                 ...action.payload,
@@ -27,7 +26,7 @@ const FavoritsSlice = createSlice({
         },
         editFavoriteFromList(state, action: PayloadAction<Favorite>) {
             const index = state.list.findIndex(item => item.id === action.payload.id);
-            state.list[index].query = action.payload.query ;
+            state.list[index] = action.payload;
         },
     }
 })
